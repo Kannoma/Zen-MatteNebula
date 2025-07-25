@@ -35,7 +35,7 @@
     &[selected],
     &[visuallyselected] {
       .tab-icon-image {
-        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
+        filter: none;
       }
 
       > .tab-stack > .tab-background {
@@ -46,7 +46,7 @@
         }
 
         &::after {
-          filter: saturate(200%) blur(13.5px) !important;
+          filter: opacity(0) !important;
         }
       }
     }

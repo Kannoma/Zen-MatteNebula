@@ -53,9 +53,6 @@ button.zen-workspace-creation-profile {
 }
 
 /* ------------------------------ Workspace Button Styles ------------------------------ */
-.zen-current-workspace-indicator-name {
-  font-weight: 600;
-}
 
 #zen-workspaces-button toolbarbutton[dragged="true"] {
   outline: none !important;
@@ -84,7 +81,7 @@ button.zen-workspace-creation-profile {
 /* Base Styling (Style 1 - Default) */
 #zen-workspaces-button {
   container-type: initial !important;
-  width: auto !important;
+  width: 100% !important;
   padding: 3px !important;
   border-radius: calc(var(--nebula-border-radius) - 2px) !important;
   background-color: light-dark(rgba(255,255,255,0.1), rgba(0,0,0,0.2)) !important;
@@ -143,7 +140,7 @@ button.zen-workspace-creation-profile {
   position: relative;
   filter: grayscale(0%) !important;
   opacity: 1 !important;
-  animation: emojiPulse 0.5s ease-out;
+  /* animation: emojiPulse 0.5s ease-out; */
 }
 
 /* Style 0 (Minimal Style) */

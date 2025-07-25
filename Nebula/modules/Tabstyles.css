@@ -24,7 +24,6 @@ tab[label$='.pdf'] .tab-label-container {
     border-radius: 3px !important;
     opacity: 0.8;
     margin: 0 6px 0 2px !important;
-    background-color: var(--identity-tab-color) !important;
   }
 
   /* Hide legacy container line */
@@ -48,7 +47,6 @@ tab[label$='.pdf'] .tab-label-container {
 
     filter: blur(12px) contrast(120%) brightness(150%);
     opacity: 1 !important;
-    background: linear-gradient(to right, var(--identity-tab-color, rgba(0, 0, 255, 0.5)), transparent 40%) !important;
     transition: opacity 0.3s ease, width 0.3s ease, background 0.3s ease, clip-path 0.3s ease !important;
   }
 
@@ -98,12 +96,8 @@ tab[label$='.pdf'] .tab-label-container {
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    filter: blur(12px) contrast(120%) brightness(150%);
-    background: linear-gradient(to right, 
-        rgba(139, 10, 10, 0.75), 
-        rgba(139, 30, 10, 0) 40%, 
-        transparent 40%
-    ) !important;
+    background: rgba(190, 30, 30, 0.35) !important;
+    filter: blur(20px);
     opacity: 0 !important;
     transition: opacity 0.3s ease !important;
     z-index: 3 !important; 
