@@ -342,18 +342,20 @@ findbar {
     transition: opacity 0.2s ease, width 0.5s ease !important;
 }
 
-:has(.browserSidebarContainer.deck-selected > .browserContainer > findbar:not([hidden="true"])) #zen-tabbox-wrapper::before {
+:has(.browserSidebarContainer.deck-selected > .browserContainer > findbar:not([hidden])) #zen-tabbox-wrapper::before {
     opacity: 1 !important;
     width: 90.05%;
 }
           
-findbar:not([hidden="true"]) {
+/* Show findbar when hidden attribute is absent */
+findbar:not([hidden]) {
     visibility: visible !important;
     animation: findbar-show-animation 0.3s ease-out forwards !important;
 }
 
 
-findbar[hidden="true"] {
+/* Hide findbar when hidden attribute is present (any value) */
+findbar[hidden] {
     opacity: 0 !important;
     transform: scale(0.95) !important;
     pointer-events: none !important;
