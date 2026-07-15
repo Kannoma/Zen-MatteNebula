@@ -1,0 +1,8 @@
+{
+    "terminal.integrated.commandsToSkipShell": [
+        "terminalKeyMode.toggle",
+        "terminalKeyMode.setNormal",
+        "terminalKeyMode.setShellPassthrough"
+    ],
+    "terminal.integrated.allowChords": true
+}

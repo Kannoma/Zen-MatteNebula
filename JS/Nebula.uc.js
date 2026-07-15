@@ -596,58 +596,12 @@
     }
   }
 
-  // ========== NebulaUpdateNotificationSuppressorModule ==========
-  class NebulaUpdateNotificationSuppressorModule {
-    constructor() {
-      this._handlePopupShowing = this._handlePopupShowing.bind(this);
-    }
-
-    init() {
-      document.addEventListener("popupshowing", this._handlePopupShowing, true);
-      Nebula.logger.log("✅ [UpdateNotificationSuppressor] Listener attached.");
-    }
-
-    _handlePopupShowing(event) {
-      const popup = event.target;
-      if (popup.id !== "appMenu-notification-popup") return;
-
-      const text = (
-        (popup.textContent || "") +
-        (popup.getAttribute("notificationid") || "") +
-        (popup.getAttribute("name") || "")
-      ).toLowerCase();
-      const hasUpdateDescendant =
-        popup.querySelector('[id*="update" i], [class*="update" i]') !== null;
-      const hasUpdateTerms =
-        text.includes("update") &&
-        /zen|browser|restart|download|install|available/i.test(text);
-      const isUpdateRelated = hasUpdateDescendant || hasUpdateTerms;
-
-      if (!isUpdateRelated) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (typeof popup.hidePopup === "function") {
-        popup.hidePopup();
-      }
-
-      Nebula.logger.log("🛡️ [UpdateNotificationSuppressor] Suppressed update popup.");
-    }
-
-    destroy() {
-      document.removeEventListener("popupshowing", this._handlePopupShowing, true);
-      Nebula.logger.log("🧹 [UpdateNotificationSuppressor] Destroyed.");
-    }
-  }
-
   // Register modules
   Nebula.register("NebulaPolyfillModule", NebulaPolyfillModule);
   Nebula.register("NebulaTitlebarBackgroundModule", NebulaTitlebarBackgroundModule);
   Nebula.register("NebulaNavbarBackgroundModule", NebulaNavbarBackgroundModule);
   Nebula.register("NebulaURLBarBackgroundModule", NebulaURLBarBackgroundModule);
   Nebula.register("NebulaMediaCoverArtModule", NebulaMediaCoverArtModule);
-  Nebula.register("NebulaUpdateNotificationSuppressorModule", NebulaUpdateNotificationSuppressorModule);
 
   // Start the core
   Nebula.init();
