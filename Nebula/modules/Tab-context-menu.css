@@ -1,0 +1,159 @@
+/* ------------------- Tab Context Menu: Quick-Action Buttons -------------------
+ * Restored from Nebula <= v2.9 (removed upstream in v3) and updated for Zen 1.21:
+ * Reload / Pin / Essential / Bookmark become a row of small icon buttons at the
+ * top of the tab right-click menu.
+ *
+ * Zen 1.21 (new Firefox menu.css) only shows .menu-icon for .menuitem-iconic
+ * items, and no longer reads --menu-image, so the icons are drawn as a
+ * background image on the menuitem itself.
+ * Hover matches Nebula tabs (Tabstyles.css): --nebula-color-hover + soft shadow.
+ */
+
+/* Hide "New Tab" option */
+#context_openANewTab {
+    display: none !important;
+}
+
+#tabContextMenu {
+    width: 280px !important;
+
+    > menuseparator {
+        &:first-of-type {
+            display: none !important;
+        }
+
+        &::before {
+            opacity: 0.3;
+        }
+    }
+}
+
+/* Only build the button row when the single-tab items are present */
+#tabContextMenu:has(#context_reloadTab:not([hidden])):has(:is(#context_zen-add-essential,
+#context_zen-remove-essential):not([hidden])):has(:is(#context_pinTab, #context_unpinTab, #context_bookmarkTab):not([hidden])) {
+    /* Separator between the button row and the rest of the menu */
+    > :nth-child(1 of menuseparator) {
+        display: flex !important;
+        visibility: visible !important;
+        order: -1 !important;
+    }
+
+    > :is(#context_reloadTab,
+    #context_zen-add-essential, #context_zen-remove-essential,
+    #context_pinTab, #context_unpinTab,
+    #context_bookmarkTab) {
+        order: -999 !important;
+        width: 25% !important;
+        --height: 42px;
+        height: var(--height) !important;
+        min-height: var(--height) !important;
+        padding: 0 !important;
+        justify-content: center !important;
+
+        background-color: transparent !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: 18px 18px !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+        border-radius: calc(var(--nebula-border-radius) - 2px) !important;
+        box-shadow: 0 0 3px transparent !important;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+
+        > :is(.menu-text, .menu-highlightable-text, .menu-accel, .menu-accel-container, .menu-icon) {
+            display: none !important;
+        }
+
+        &::before {
+            content: none !important;
+            display: none !important;
+        }
+
+        /* Firefox draws badges inline next to the (hidden) label; that overlapped the icon */
+        &:not(#context_zen-add-essential)::after {
+            content: none !important;
+            display: none !important;
+        }
+
+        /* Same hover as Nebula tabs */
+        &[_moz-menuactive]:not([disabled]),
+        &:hover:not([disabled]) {
+            background-color: var(--nebula-color-hover) !important;
+            box-shadow: 0 0 3px light-dark(rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.55)) !important;
+        }
+    }
+
+    /* Icons */
+    #context_reloadTab {
+        background-image: url("chrome://browser/skin/zen-icons/reload.svg") !important;
+    }
+
+    #context_pinTab {
+        background-image: url("chrome://browser/skin/zen-icons/pin.svg") !important;
+    }
+
+    #context_unpinTab {
+        background-image: url("chrome://browser/skin/zen-icons/unpin.svg") !important;
+    }
+
+    #context_zen-add-essential {
+        background-image: url("chrome://browser/skin/zen-icons/essential-add.svg") !important;
+
+        /* Essentials counter ("3 / 12") as a small caption under the icon */
+        &[badge] {
+            position: relative !important;
+            background-position: center 7px !important;
+
+            &::after {
+                content: attr(badge) !important;
+                display: block !important;
+                position: absolute !important;
+                left: 2px;
+                right: 2px;
+                bottom: 4px;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                background: none !important;
+                color: inherit !important;
+                font-size: 9px !important;
+                font-weight: normal !important;
+                line-height: 1 !important;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                opacity: 0.6;
+                pointer-events: none;
+            }
+        }
+    }
+
+    #context_zen-remove-essential {
+        background-image: url("chrome://browser/skin/zen-icons/essential-remove.svg") !important;
+    }
+
+    #context_bookmarkTab {
+        background-image: url("chrome://browser/skin/zen-icons/bookmark-hollow.svg") !important;
+    }
+
+    /* Positioning each button in one row (each item pulled up onto the first) */
+    #context_reloadTab {
+        margin-left: 0 !important;
+    }
+
+    :is(#context_pinTab, #context_unpinTab) {
+        margin-left: 25% !important;
+        margin-top: calc(0px - var(--height)) !important;
+    }
+
+    :is(#context_zen-add-essential, #context_zen-remove-essential) {
+        margin-left: 50% !important;
+        margin-top: calc(0px - var(--height)) !important;
+    }
+
+    #context_bookmarkTab {
+        margin-left: 75% !important;
+        margin-top: calc(0px - var(--height)) !important;
+    }
+}

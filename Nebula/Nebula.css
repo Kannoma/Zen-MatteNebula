@@ -13,6 +13,7 @@
 @import "modules/Animations(tabs).css";
 @import "modules/Tabfolders.css";
 @import "modules/Workspace-buttons.css";
+@import "modules/Tab-context-menu.css";
 
 /* config import */
 @import "Nebula-config.css";
