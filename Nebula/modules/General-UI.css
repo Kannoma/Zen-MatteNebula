@@ -117,3 +117,11 @@ browser {
   border: 1px solid var(--zen-colors-border) !important;
   background: light-dark(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0.9)) !important;
 }
+
+/* ------------------ NO UPDATE POPUP ------------------ */
+/* Hide the "update available / restart to update" doorhanger that covers the browser.
+ * The hamburger-menu badge and the update banner inside the menu stay, so updating
+ * is still one click away when you want it. Other app-menu notifications are untouched. */
+#appMenu-notification-popup:has(> popupnotification[id^="appMenu-update-"]:not([hidden])) {
+  display: none !important;
+}
